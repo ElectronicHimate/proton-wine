@@ -193,6 +193,7 @@
 # @ stub NtCreateProcessEx
 # @ stub NtCreateProfile
 @ stdcall -syscall NtCreateSection(ptr long ptr ptr long long long)
+@ stdcall -syscall NtCreateSectionEx(ptr long ptr ptr long long long ptr long)
 @ stdcall -syscall NtCreateSemaphore(ptr long ptr long long)
 @ stdcall -syscall NtCreateSymbolicLinkObject(ptr long ptr ptr)
 @ stdcall -syscall NtCreateThread(ptr long ptr long ptr ptr ptr long)
