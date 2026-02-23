@@ -202,26 +202,38 @@ do
       "dlls_wow64_syscall_c.patch"
       "loader_wine_inf_in.patch"
 
-      # bylaws patch
-#      "test-bylaws/dlls_ntdll_signal_arm64_c.patch"
-#      "test-bylaws/dlls_ntdll_signal_arm64ec_c.patch"
-#      "test-bylaws/dlls_ntdll_signal_x86_64_c.patch"
-#      "test-bylaws/dlls_ntdll_unwind_h.patch"
-#      "test-bylaws/include_winnt_h.patch"
+      # fix build
       "programs_wineboot_wineboot_c.patch"
       "dlls_wdscore_wdscore_spec.patch"
-#      "test-bylaws/dlls_ntdll_ntdll_spec.patch"
-#      "test-bylaws/dlls_ntdll_ntdll_misc_h.patch"
-#      "test-bylaws/dlls_wow64_process_c.patch"
-#      "test-bylaws/dlls_wow64_wow64_spec.patch"
-#      "test-bylaws/dlls_wow64_virtual_c.patch"
-#      "test-bylaws/include_winternl_h.patch"
-#      "test-bylaws/server_thread_h.patch"
-#      "test-bylaws/server_thread_c.patch"
-#      "test-bylaws/server_process_c.patch"
-#      "test-bylaws/dlls_ntdll_unix_thread_c.patch"
+
+      # 1. Extended State (XSTATE/YMM) Support Patches
+      "test-bylaws/dlls_ntdll_unwind_h.patch"
+      "test-bylaws/include_winnt_h.patch"
+
+      # 2. Thread Suspension Patches
+      "test-bylaws/dlls_ntdll_signal_arm64_c.patch"
+      "test-bylaws/dlls_ntdll_signal_arm64ec_c.patch"
+      "test-bylaws/dlls_ntdll_signal_x86_64_c.patch"
+      "test-bylaws/dlls_ntdll_ntdll_spec.patch"
+      "test-bylaws/dlls_ntdll_ntdll_misc_h.patch"
+      "test-bylaws/dlls_wow64_process_c.patch"
+      "test-bylaws/dlls_wow64_wow64_spec.patch"
+
+      # 3. Process and Virtual Memory Management
+      "test-bylaws/dlls_wow64_virtual_c.patch"
+      "test-bylaws/server_process_c.patch"
+      "test-bylaws/dlls_ntdll_unix_process_c.patch"
+
+      # 4. Server and Threading Infrastructure
+      "test-bylaws/server_thread_h.patch"
+      "test-bylaws/server_thread_c.patch"
+      "test-bylaws/dlls_ntdll_unix_thread_c.patch"
+
+      # 5. Internal Headers
+      "test-bylaws/include_winternl_h.patch"
+
+      # 6. Build System (Optional)
 #      "test-bylaws/tools_makedep_c.patch"
-#      "test-bylaws/dlls_ntdll_unix_process_c.patch"
     )
 
     for patch in "${PATCHES[@]}"; do
