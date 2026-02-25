@@ -2,9 +2,9 @@ name: Build Proton Wine
 
 on:
   push:
-    branches: [ main, master, proton_10.0 ]
+    branches: [ main, master, bleeding-edge ]
   pull_request:
-    branches: [ main, master, proton_10.0 ]
+    branches: [ main, master, bleeding-edge ]
   workflow_dispatch:
 
 jobs:
