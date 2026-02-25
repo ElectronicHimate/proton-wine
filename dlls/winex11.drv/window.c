@@ -567,7 +567,9 @@ static void sync_window_style( struct x11drv_win_data *data )
         TRACE( "window %p/%lx changing attributes mask %#x, serial %lu\n", data->hwnd,
                data->whole_window, mask, NextRequest( data->display ) );
         XChangeWindowAttributes( data->display, data->whole_window, mask, &attr );
+#ifdef HAVE_X11_EXTENSIONS_XINPUT2_H
         x11drv_xinput2_enable( data->display, data->whole_window );
+#endif
     }
 }
 
@@ -1166,6 +1168,10 @@ static void set_initial_wm_hints( Display *display, Window window )
     /* class hints */
     if ((class_hints = XAllocClassHint()))
     {
+#ifdef __ANDROID__
+        class_hints->res_name = process_name;
+        class_hints->res_class = process_name;
+#else
         static char steam_proton[] = "steam_proton";
         const char *app_id = getenv("SteamAppId");
         char proton_app_class[128];
@@ -1178,18 +1184,21 @@ static void set_initial_wm_hints( Display *display, Window window )
             class_hints->res_name = steam_proton;
             class_hints->res_class = steam_proton;
         }
-
+#endif
         XSetClassHint( display, window, class_hints );
         XFree( class_hints );
     }
 
     /* set the WM_CLIENT_MACHINE and WM_LOCALE_NAME properties */
     XSetWMProperties(display, window, NULL, NULL, NULL, 0, NULL, NULL, NULL);
+
+#ifndef __ANDROID__
     /* set the pid. together, these properties are needed so the window manager can kill us if we freeze */
     i = getpid();
     XChangeProperty(display, window, x11drv_atom(_NET_WM_PID),
                     XA_CARDINAL, 32, PropModeReplace, (unsigned char *)&i, 1);
-
+#endif
+    
     XChangeProperty( display, window, x11drv_atom(XdndAware),
                      XA_ATOM, 32, PropModeReplace, (unsigned char*)&dndVersion, 1 );
 }
