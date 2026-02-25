@@ -2226,6 +2226,18 @@ void set_net_active_window( HWND hwnd, HWND previous )
     XSendEvent( data->display, DefaultRootWindow( data->display ), False,
                 SubstructureRedirectMask | SubstructureNotifyMask, &xev );
     XFlush( data->display );
+
+#ifdef __ANDROID__
+    DWORD pid = 0;
+
+    NtUserGetWindowThread( hwnd, &pid );
+
+    XChangeProperty(data->display, window, x11drv_atom(_NET_WM_PID),
+                    XA_CARDINAL, 32, PropModeReplace, (unsigned char *)&pid, 1);
+
+    XChangeProperty( data->display, window, x11drv_atom(_NET_WM_HWND),
+                      XA_CARDINAL, 32, PropModeReplace, (unsigned char *)&hwnd, 2 );
+#endif
 }
 
 BOOL window_has_pending_wm_state( HWND hwnd, UINT state )
@@ -2650,7 +2662,9 @@ static void create_whole_window( struct x11drv_win_data *data )
 
     /* Set override-redirect attribute only after window creation, Mutter gets confused otherwise */
     window_set_managed( data, is_window_managed( data->hwnd, SWP_NOACTIVATE, FALSE ) );
+#ifdef HAVE_X11_EXTENSIONS_XINPUT2_H
     x11drv_xinput2_enable( data->display, data->whole_window );
+#endif
     set_initial_wm_hints( data->display, data->whole_window );
     set_wm_hints( data );
 
@@ -2970,8 +2984,10 @@ BOOL X11DRV_CreateWindow( HWND hwnd )
             if (!wcscmp( winstation_name, winsta0 ))
             {
                 /* listen to raw xinput event in the desktop window thread */
+#ifdef HAVE_X11_EXTENSIONS_XINPUT2_H
                 data->xinput2_rawinput = TRUE;
                 x11drv_xinput2_enable( data->display, DefaultRootWindow( data->display ) );
+#endif
             }
         }
         /* create the cursor clipping window */
