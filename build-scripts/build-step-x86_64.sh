@@ -163,7 +163,6 @@ do
       "0340-ntdll-Use-the-bundled-tomcrypt-for-the-crc32-impleme.patch"
       "0356-ntdll-Stop-unwinding-on-access-violation.patch"
       "0373-ntdll-Reimplement-NtWaitForSingleObject-without-NtWa.patch"
-      "0378-ntdll-Add-some-missing-Zw-exports.patch"
       "0468-ntdll-Add-some-special-XDG-env-vars.patch"
       "0477-ntdll-Do-not-rely-on-CLOCK_REALTIME_COURSE-for-NtQue.patch"
       "0485-ntdll-Avoid-infinite-wait-during-process-termination.patch"
