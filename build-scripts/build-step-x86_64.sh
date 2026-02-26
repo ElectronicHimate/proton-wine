@@ -164,11 +164,6 @@ do
       "0356-ntdll-Stop-unwinding-on-access-violation.patch"
       "0373-ntdll-Reimplement-NtWaitForSingleObject-without-NtWa.patch"
       "0378-ntdll-Add-some-missing-Zw-exports.patch"
-      "0426-ntdll-Implement-RtlSubtreePredecessor.patch"
-      "0427-ntdll-tests-Add-RtlSubtreePredecessor-tests.patch"
-      "0442-ntdll-Implement-RtlIsGenericTableEmpty.patch"
-      "0448-ntdll-Implement-RtlLookupElementGenericTable.patch"
-      "0450-ntdll-Implement-RtlEnumerateGenericTableWithoutSplay.patch"
       "0468-ntdll-Add-some-special-XDG-env-vars.patch"
       "0477-ntdll-Do-not-rely-on-CLOCK_REALTIME_COURSE-for-NtQue.patch"
       "0485-ntdll-Avoid-infinite-wait-during-process-termination.patch"
@@ -265,8 +260,6 @@ do
       "0232-include-Prevent-misuse-of-__WINE_ATOMIC_-helper-macr.patch"
       "0244-include-Move-InitializeObjectAttributes-definition-t.patch"
       "0328-include-Mark-global-asm-functions-as-hidden.patch"
-      "0341-include-Fix-PRTL_GENERIC_ALLOCATE_ROUTINE-prototype.patch"
-      "0342-include-Add-splay-link-tree-helpers.patch"
       "0230-include-Fix-ReadNoFence64-on-i386.patch"
       
       # android network patch
