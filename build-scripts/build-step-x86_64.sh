@@ -123,7 +123,7 @@ do
       --with-vulkan \
       --without-wayland \
       --without-xcomposite \
-      --without-xcursor \
+      --with-xcursor \
       --without-xfixes \
       --without-xinerama \
       --without-xinput \
