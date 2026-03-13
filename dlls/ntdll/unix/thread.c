@@ -1617,15 +1617,15 @@ NTSTATUS WINAPI NtRaiseException( EXCEPTION_RECORD *rec, CONTEXT *context, BOOL 
 
     if (status == DBG_CONTINUE || status == DBG_EXCEPTION_HANDLED)
         return NtContinue( context, FALSE );
-
-	if (force_ntcontinue == -1)
-		force_ntcontinue == getenv("WINE_NTFORCECONTINUE") && atoi(getenv("WINE_NTFORCECONTINUE"));
-
-    if (force_ntcontinue) return NtContinue( context, FALSE );
     
     if (first_chance) return call_user_exception_dispatcher( rec, context );
 
-    if (rec->ExceptionFlags & EXCEPTION_STACK_INVALID)
+    if (force_ntcontinue == -1)
+    	force_ntcontinue == getenv("WINE_NTFORCECONTINUE") && atoi(getenv("WINE_NTFORCECONTINUE"));
+    
+    if (force_ntcontinue) 
+    	return NtContinue( context, FALSE );
+    else if (rec->ExceptionFlags & EXCEPTION_STACK_INVALID)
         ERR_(seh)("Exception frame is not in stack limits => unable to dispatch exception.\n");
     else if (rec->ExceptionCode == STATUS_NONCONTINUABLE_EXCEPTION)
         ERR_(seh)("Process attempted to continue execution after noncontinuable exception.\n");
